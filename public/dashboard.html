@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — StudyFlow Academic Momentum</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+    // Route guard to prevent unauthenticated access
+    if (!localStorage.getItem('sessionToken')) {
+      window.location.replace('/login.html');
+    }
+  </script>
+</head>
+<body class="dashboard-layout">
+
+  <!-- Left Sidebar Navigation -->
+  <aside class="sidebar">
+    <!-- Brand Logo -->
+    <a href="/dashboard.html" class="sidebar-logo" data-view="dashboard">
+      <div class="sidebar-logo-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"></path>
+        </svg>
+      </div>
+      <div class="sidebar-logo-text">
+        <h2>StudyFlow</h2>
+        <span>Academic Momentum</span>
+      </div>
+    </a>
+
+    <!-- Navigation Menu Links -->
+    <ul class="sidebar-menu">
+      <li>
+        <a href="#dashboard" class="sidebar-link active" data-view="dashboard">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
+          </svg>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a href="#schedule" class="sidebar-link" data-view="schedule">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Schedule
+        </a>
+      </li>
+      <li>
+        <a href="#tasks" class="sidebar-link" data-view="tasks">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+          </svg>
+          Tasks
+        </a>
+      </li>
+      <li>
+        <a href="#analytics" class="sidebar-link" data-view="analytics">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2" />
+          </svg>
+          Analytics
+        </a>
+      </li>
+    </ul>
+
+    <!-- Sidebar footer actions -->
+    <div class="sidebar-footer">
+      <button class="btn btn-primary" data-view="add-task">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="stroke: white;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        Add New Task
+      </button>
+      
+      <a href="#" class="sidebar-link" onclick="alert('Help center is offline for maintenance.')" style="border-top: 1px solid rgba(226, 232, 240, 0.5); padding-top: 16px; border-radius: 0;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Help
+      </a>
+      
+      <a href="#" id="logout-btn" class="sidebar-link" style="color: var(--critical);">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="stroke: var(--critical);">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Panel Container -->
+  <div class="dashboard-main">
+    
+    <!-- Top actions header bar -->
+    <header class="topbar">
+      <!-- Search input container -->
+      <div class="topbar-search">
+        <span class="topbar-search-icon">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </span>
+        <input type="text" id="global-search" class="topbar-search-input" placeholder="Search tasks or subjects...">
+      </div>
+
+      <!-- User controls -->
+      <div class="topbar-right">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="topbar-icon-btn" aria-label="Toggle dark mode">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 7a5 5 0 100 10 5 5 0 000-10z"></path>
+          </svg>
+        </button>
+
+        <!-- Settings Gear button -->
+        <button class="topbar-icon-btn" aria-label="Settings" data-view="settings">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        </button>
+
+        <!-- Notifications Bell -->
+        <button class="topbar-icon-btn" aria-label="Notifications" onclick="alert('No new alerts.')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+          </svg>
+        </button>
+
+        <!-- Identity and avatar photo -->
+        <span id="header-username" style="font-size: 0.9rem; font-weight: 700; color: var(--text-secondary);">Student</span>
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100" alt="Student Profile Avatar" class="topbar-avatar-img">
+      </div>
+    </header>
+
+    <!-- Main Dynamic Contents Area -->
+    <main class="dashboard-content-revamped">
+
+      <!-- ========================================== -->
+      <!-- VIEW: DASHBOARD (HOME SCREEN)              -->
+      <!-- ========================================== -->
+      <section id="view-dashboard" class="view-section active">
+        <!-- Greeting Section -->
+        <div class="greeting-row">
+          <div class="greeting-info">
+            <h1 id="welcome-message">Welcome back!</h1>
+            <p>Ready to conquer your goals today?</p>
+          </div>
+          <div class="streak-badge">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 4px; color: #f97316;">
+              <path d="M17.66 11.57c-.77-1.39-2.03-2.42-3.25-3.41-1.32-1.07-2.61-2.29-3.27-3.87-.28-.68-.45-1.62-.14-2.29.28-.58.87-.99 1.47-1 .13-.01.21.14.13.23-.97 1.15-.99 2.76-.05 3.86 1.13 1.33 2.74 2.19 3.89 3.51 1.48 1.71 1.93 4.18 1.15 6.32-.05.14-.23.17-.31.05-.18-.28-.39-.55-.63-.8-.77-.81-1.72-1.43-2.58-2.2-.08-.07-.2-.03-.2.07.13 1.25-.2 2.5-1 3.51-.76.96-1.89 1.63-2.9 2.33-1.12.75-2.22 1.56-3.13 2.56C3.93 18 3.5 19.46 3.5 21c0 3.63 2.97 6.57 6.6 6.57 4.28 0 7.76-3.48 7.76-7.76 0-3.32-1.49-6.38-4.2-8.24z"/>
+            </svg>
+            <span id="dashboard-streak-label">5 Day Streak</span>
+          </div>
+        </div>
+
+        <!-- Metric Cards Row -->
+        <div class="metrics-grid">
+          <!-- Active Tasks Card -->
+          <div class="metric-card-revamped">
+            <div class="metric-icon-box icon-blue-bg">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+              </svg>
+            </div>
+            <span class="metric-card-meta">Total</span>
+            <div id="stat-total" class="metric-val">0</div>
+            <span class="metric-lbl">Active Tasks</span>
+          </div>
+
+          <!-- Completed Tasks Card -->
+          <div class="metric-card-revamped">
+            <div class="metric-icon-box icon-green-bg">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <span id="stat-completed-meta" class="metric-card-meta" style="color: var(--success);">+0 today</span>
+            <div id="stat-completed" class="metric-val">0</div>
+            <span class="metric-lbl">Completed</span>
+          </div>
+
+          <!-- Pending Tasks Card -->
+          <div class="metric-card-revamped">
+            <div class="metric-icon-box icon-orange-bg">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <span id="stat-pending-meta" class="metric-card-meta" style="color: var(--academic-text);">0 left</span>
+            <div id="stat-pending" class="metric-val">0</div>
+            <span class="metric-lbl">Pending Tasks</span>
+          </div>
+
+          <!-- Upcoming Deadlines Card -->
+          <div class="metric-card-revamped">
+            <div class="metric-icon-box icon-red-bg">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <span id="stat-deadlines-meta" class="metric-card-meta">Clear</span>
+            <div id="stat-deadlines" class="metric-val">0</div>
+            <span class="metric-lbl">Deadlines</span>
+          </div>
+        </div>
+
+        <!-- Dashboard Grid Split -->
+        <div class="dashboard-grid-split">
+          <!-- Left checklist: Today's Focus -->
+          <div class="panel-card-revamped">
+            <div class="panel-card-header">
+              <h3>Today's Focus</h3>
+              <a href="#tasks" class="panel-header-link" data-view="tasks">View All Tasks</a>
+            </div>
+
+            <!-- Focus Checklist items -->
+            <div id="tasks-checklist" class="tasks-checklist">
+              <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+                Loading study checklist...
+              </div>
+            </div>
+
+            <!-- Dotted Quick Add inline input -->
+            <div class="quick-add-container">
+              <div class="quick-add-row">
+                <span id="quick-add-icon">➕</span>
+                <input type="text" id="quick-add-input" class="quick-add-input" placeholder="Quick add a task...">
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column details: Weekly Progress Circle & Deadline banner -->
+          <div>
+            <!-- Weekly progress card -->
+            <div class="panel-card-revamped weekly-progress-card">
+              <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: -8px; width: 100%; text-align: left;">Weekly Progress</h3>
+              
+              <!-- Circle progress widget -->
+              <div style="position: relative; width: 160px; height: 160px;">
+                <svg width="160" height="160" viewBox="0 0 160 160">
+                  <circle cx="80" cy="80" r="70" fill="none" stroke="var(--border-glass)" stroke-width="12" />
+                  <circle id="progress-circle" cx="80" cy="80" r="70" fill="none" stroke="var(--primary)" stroke-width="12" 
+                          stroke-dasharray="440" stroke-dashoffset="440" stroke-linecap="round" style="transition: stroke-dashoffset 0.6s ease; transform: rotate(-90deg); transform-origin: 50% 50%;" />
+                </svg>
+                <div id="progress-circle-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2.2rem; font-weight: 800; font-family: 'Outfit', sans-serif; color: var(--text-primary);">
+                  0%
+                </div>
+              </div>
+
+              <!-- Motivational text -->
+              <div id="progress-motivation" class="weekly-progress-text">
+                Complete a task to kickstart your weekly goal.
+              </div>
+
+              <!-- Goal efficiency progress -->
+              <div class="goal-efficiency-wrapper">
+                <div class="efficiency-row">
+                  <span>Goal Efficiency</span>
+                  <span id="efficiency-score-label" style="color: var(--primary);">Optimal</span>
+                </div>
+                <div class="efficiency-bar">
+                  <div id="efficiency-fill" class="efficiency-fill"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Next Deadline Banner widget -->
+            <div id="next-deadline-banner" class="next-deadline-banner" style="display: none;">
+              <div class="deadline-banner-lbl">Next Deadline</div>
+              <h4 id="next-deadline-title" class="deadline-banner-title">Macroeconomics Midterm</h4>
+              <div class="deadline-banner-time">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span id="next-deadline-time-text">2 Days Left</span>
+              </div>
+              <div class="deadline-banner-bg-book"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW: TASKS WORKSPACE (SCREENSHOT 1)      -->
+      <!-- ========================================== -->
+      <section id="view-tasks" class="view-section">
+        <div class="tasks-header-row">
+          <div>
+            <h1>Master Your Tasks</h1>
+            <p id="tasks-due-status-lbl" style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 4px;">You have 0 tasks due this week. Let's keep the momentum going!</p>
+          </div>
+          <div class="tasks-header-actions">
+            <!-- Sorting dropdown -->
+            <select id="tasks-sort-select" class="action-select-btn" aria-label="Sort tasks">
+              <option value="date" selected>Sort by: Date</option>
+              <option value="priority">Sort by: Priority</option>
+              <option value="title">Sort by: Title</option>
+            </select>
+            <!-- Toggle Filters layout button -->
+            <button id="toggle-filter-bar-btn" class="action-select-btn">
+              <span>🎛️</span> Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick filter buttons panel -->
+        <div class="quick-filters-row">
+          <span class="quick-filters-lbl">Quick Filters:</span>
+          <button class="pill-filter active" data-filter="all">All Tasks</button>
+          <button class="pill-filter" data-filter="pending">Pending</button>
+          <button class="pill-filter" data-filter="critical">High Priority</button>
+          <button class="pill-filter" data-filter="completed">Completed</button>
+        </div>
+
+        <!-- Detailed hidden filters box -->
+        <div id="extended-filter-bar" class="panel-card-revamped" style="margin-bottom: 24px; padding: 20px; display: none;">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+            <div class="form-group">
+              <label for="filter-subject">Filter by Subject</label>
+              <select id="filter-subject" class="form-control">
+                <option value="all">All Subjects</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="filter-priority">Filter by Priority</label>
+              <select id="filter-priority" class="form-control">
+                <option value="all">All Priorities</option>
+                <option value="Critical">Critical</option>
+                <option value="Academic">Academic</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+            <div class="form-group" style="display: flex; align-items: flex-end;">
+              <button id="clear-all-filters-btn" class="btn btn-secondary" style="width: 100%; height: 44px; font-size: 0.88rem;">Clear All Filters</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Task cards grid -->
+        <div id="tasks-cards-grid" class="tasks-cards-grid">
+          <!-- Dynamically populated card nodes -->
+        </div>
+
+        <!-- Pagination Load more rows -->
+        <div class="tasks-load-more-row">
+          <button id="load-more-tasks-btn" class="action-select-btn" style="padding: 12px 28px; border-radius: 99px;">
+            Load More Tasks <span>▼</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW: CREATE / EDIT TASK FORM (SCREENSHOT 2)-->
+      <!-- ========================================== -->
+      <section id="view-add-task" class="view-section">
+        <div class="form-card-high-fidelity">
+          <div class="form-card-header">
+            <h2 id="add-task-view-title">Create New Task</h2>
+            <p>Break down your goals into actionable study sessions.</p>
+          </div>
+
+          <!-- Main Input Form -->
+          <form id="dedicated-task-form">
+            <!-- Hidden field to track edit tasks id -->
+            <input type="hidden" id="edit-task-id" value="">
+
+            <div class="form-group">
+              <label for="form-task-title" style="font-weight: 700; margin-bottom: 8px;">Task Title</label>
+              <input type="text" id="form-task-title" class="form-control" placeholder="e.g., Review Midterm Chapter 4" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; margin-top: 20px;">
+              <div class="form-group">
+                <label for="form-task-subject" style="font-weight: 700; margin-bottom: 8px;">Subject/Course Name</label>
+                <select id="form-task-subject" class="form-control" required>
+                  <option value="" disabled selected>Select a course</option>
+                  <option value="Computer Science">Computer Science</option>
+                  <option value="Mathematics">Mathematics</option>
+                  <option value="Physics">Physics</option>
+                  <option value="Chemistry">Chemistry</option>
+                  <option value="Literature">Literature</option>
+                  <option value="General">General Study</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="form-task-due" style="font-weight: 700; margin-bottom: 8px;">Due Date</label>
+                <input type="datetime-local" id="form-task-due" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px;">
+              <label for="form-task-desc" style="font-weight: 700; margin-bottom: 8px;">Description</label>
+              <textarea id="form-task-desc" class="form-control" style="height: 100px; resize: vertical;" placeholder="What specifically needs to be accomplished?"></textarea>
+            </div>
+
+            <!-- Priority Segments -->
+            <div class="form-group" style="margin-top: 24px;">
+              <label style="font-weight: 700; margin-bottom: 10px; display: block;">Priority Level</label>
+              <div class="priority-segments">
+                <button type="button" class="priority-seg-btn active" data-priority="Low">
+                  <span class="seg-dot dot-low"></span> Low
+                </button>
+                <button type="button" class="priority-seg-btn" data-priority="Academic">
+                  <span class="seg-dot dot-med"></span> Medium
+                </button>
+                <button type="button" class="priority-seg-btn" data-priority="Critical">
+                  <span class="seg-dot dot-high"></span> High
+                </button>
+              </div>
+            </div>
+
+            <!-- Est Study Time Slider -->
+            <div class="form-group" style="margin-top: 24px; margin-bottom: 32px;">
+              <label style="font-weight: 700; margin-bottom: 8px; display: block;">Estimated Study Time</label>
+              <div class="slider-wrapper">
+                <input type="range" id="form-task-slider" class="slider-range-input" min="15" max="240" step="15" value="60">
+                <div id="form-slider-val" class="slider-val-badge">60 min</div>
+              </div>
+            </div>
+
+            <!-- Form Actions buttons row -->
+            <div class="form-actions-row">
+              <button type="button" id="form-cancel-btn" class="btn btn-secondary" style="height: 48px; padding: 0 32px; border-radius: 10px; font-weight: 700;">Cancel</button>
+              <button type="submit" class="btn btn-primary" style="height: 48px; padding: 0 32px; border-radius: 10px; font-weight: 700; background-color: var(--primary); display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V10m-6-6h.01M9 16h.01"></path>
+                </svg>
+                Save Task
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Strategy Tip Teal box -->
+        <div class="strategy-tip-banner">
+          <div class="strategy-tip-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--accent);">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364.364l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <div class="strategy-tip-text">
+            <h5>Study Strategy Tip</h5>
+            <p>Break large tasks like "Study for Exam" into smaller 45-minute chunks. This helps maintain focus and gives you more frequent 'wins' to boost motivation!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW: SETTINGS & PROFILE (SCREENSHOT 3)   -->
+      <!-- ========================================== -->
+      <section id="view-settings" class="view-section">
+        <div class="tasks-header-row">
+          <div>
+            <h1>Settings</h1>
+            <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 4px;">Customize your workspace and notification preferences.</p>
+          </div>
+        </div>
+
+        <!-- Settings layout layout wrapper -->
+        <div class="settings-layout-wrapper">
+          <!-- Left side categories menu -->
+          <ul class="settings-sub-menu">
+            <li><a class="settings-sub-link active" data-settings-tab="profile">Profile & Goals</a></li>
+            <li><a class="settings-sub-link" data-settings-tab="appearance">Appearance</a></li>
+            <li><a class="settings-sub-link" data-settings-tab="notifications">Notifications</a></li>
+            <li><a class="settings-sub-link" data-settings-tab="language">Language</a></li>
+          </ul>
+
+          <!-- Right side tabs pane -->
+          <div class="settings-content-pane">
+            
+            <!-- Tab: Profile & Goals -->
+            <div id="settings-tab-profile" class="settings-segment-card">
+              <h3>Profile & Study Goals</h3>
+              <form id="profile-goals-form">
+                <div class="form-group">
+                  <label for="settings-fullname">Full Name</label>
+                  <input type="text" id="settings-fullname" class="form-control" placeholder="e.g. Alex Rivera" required>
+                </div>
+                <div class="form-group" style="margin-top: 16px;">
+                  <label for="settings-goal">Study Goal (Weekly Hours)</label>
+                  <input type="number" id="settings-goal" class="form-control" min="1" max="100" placeholder="e.g. 40" required>
+                </div>
+                <div class="form-group" style="margin-top: 16px; margin-bottom: 24px;">
+                  <label for="settings-focus">Primary Focus</label>
+                  <select id="settings-focus" class="form-control">
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Literature">Literature</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="height: 44px; padding: 0 24px; border-radius: 8px;">Save Changes</button>
+              </form>
+            </div>
+
+            <!-- Tab: Appearance -->
+            <div id="settings-tab-appearance" class="settings-segment-card" style="display: none;">
+              <h3>Appearance</h3>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <h4>Dark Mode</h4>
+                  <p>Reduce eye strain at night by toggling a dark slate color layout.</p>
+                </div>
+                <label class="switch-control">
+                  <input type="checkbox" id="settings-darkmode-toggle">
+                  <span class="slider-switch"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Tab: Notifications -->
+            <div id="settings-tab-notifications" class="settings-segment-card" style="display: none;">
+              <h3>Notifications Settings</h3>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <h4>Email Reminders</h4>
+                  <p>Receive summaries of pending deadlines every morning.</p>
+                </div>
+                <label class="switch-control">
+                  <input type="checkbox" checked>
+                  <span class="slider-switch"></span>
+                </label>
+              </div>
+              <div class="toggle-row" style="margin-top: 16px;">
+                <div class="toggle-info">
+                  <h4>Browser Notifications</h4>
+                  <p>Alert you when a task is due within 1 hour.</p>
+                </div>
+                <label class="switch-control">
+                  <input type="checkbox" checked>
+                  <span class="slider-switch"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Tab: Language -->
+            <div id="settings-tab-language" class="settings-segment-card" style="display: none;">
+              <h3>Language Selection</h3>
+              <div class="languages-grid">
+                <!-- English -->
+                <div class="lang-card-option selected" data-lang="en">
+                  <input type="radio" name="lang-select" class="lang-radio" checked>
+                  <span class="lang-name">English (US)</span>
+                </div>
+                <!-- Spanish -->
+                <div class="lang-card-option" data-lang="es">
+                  <input type="radio" name="lang-select" class="lang-radio">
+                  <span class="lang-name">Spanish (ES)</span>
+                </div>
+                <!-- French -->
+                <div class="lang-card-option" data-lang="fr">
+                  <input type="radio" name="lang-select" class="lang-radio">
+                  <span class="lang-name">French (FR)</span>
+                </div>
+                <!-- German -->
+                <div class="lang-card-option" data-lang="de">
+                  <input type="radio" name="lang-select" class="lang-radio">
+                  <span class="lang-name">German (DE)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Danger Zone Segment Block -->
+            <div class="settings-segment-card" style="border-color: #fca5a5;">
+              <h3>Danger Zone</h3>
+              <div class="danger-zone-box">
+                <div class="danger-text">
+                  <h4>Reset All Tasks</h4>
+                  <p>Permanently delete all study progress and tasks. This cannot be undone.</p>
+                </div>
+                <button id="reset-tasks-btn" class="btn btn-primary" style="background-color: #dc2626; border-radius: 8px; height: 44px; padding: 0 20px; font-weight: 700; border: none;">Reset All Tasks</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW: STUDY ANALYTICS (SCREENSHOT 4)       -->
+      <!-- ========================================== -->
+      <section id="view-analytics" class="view-section">
+        <div class="tasks-header-row">
+          <div>
+            <h1>Progress Insights</h1>
+            <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 4px;">Analyze your academic trajectory and maintain your momentum.</p>
+          </div>
+        </div>
+
+        <!-- Top Widgets row -->
+        <div class="insights-top-row">
+          
+          <!-- Peak Productivity summary widget -->
+          <div class="panel-card-revamped">
+            <div class="insights-card-summary">
+              <!-- Radial Completion gauge -->
+              <div style="position: relative; width: 140px; height: 140px; margin: 0 auto;">
+                <svg width="140" height="140" viewBox="0 0 140 140">
+                  <circle cx="70" cy="70" r="60" fill="none" stroke="var(--border-glass)" stroke-width="10" />
+                  <circle id="analytics-circle" cx="70" cy="70" r="60" fill="none" stroke="#1e3a8a" stroke-width="10" 
+                          stroke-dasharray="377" stroke-dashoffset="377" stroke-linecap="round" style="transition: stroke-dashoffset 0.6s ease; transform: rotate(-90deg); transform-origin: 50% 50%;" />
+                </svg>
+                <div id="analytics-circle-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.8rem; font-weight: 800; color: #1e3a8a; font-family: 'Outfit';">
+                  70%
+                </div>
+              </div>
+
+              <!-- Content details -->
+              <div class="insights-summary-details">
+                <div class="streak-badge" style="background-color: #ccfbf1; color: #0f766e; font-size: 0.8rem; padding: 6px 12px; border-radius: 8px; margin-bottom: 8px;">
+                  <span id="analytics-streak-label">⚡ 12 Day Streak</span>
+                </div>
+                <h4 id="analytics-productivity-title">Peak Productivity Reached</h4>
+                <p id="analytics-productivity-desc">Loading study accomplishments...</p>
+                
+                <!-- Bottom detail markers -->
+                <div class="insights-summary-stats-box">
+                  <div class="summary-stat-item">
+                    <span id="analytics-time-val" class="summary-stat-val">0h 0m</span>
+                    <span class="summary-stat-lbl">Study Time</span>
+                  </div>
+                  <div class="summary-stat-item" style="border-left: 1px solid #f1f5f9; padding-left: 20px;">
+                    <span id="analytics-units-val" class="summary-stat-val">0</span>
+                    <span class="summary-stat-lbl">Units Mastered</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weekly Activity Chart simulation card -->
+          <div class="panel-card-revamped">
+            <div class="chart-header">
+              <h3 class="chart-title">Weekly Activity</h3>
+              <span id="analytics-chart-rate-pill" class="chart-rate-pill">+0% vs last week</span>
+            </div>
+
+            <!-- SVG graph chart -->
+            <div class="svg-chart-container">
+              <!-- Simple background horizontal lines -->
+              <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background-color: #f1f5f9;"></div>
+              <div style="position: absolute; top: 40px; left: 0; right: 0; height: 1px; background-color: #f1f5f9;"></div>
+              <div style="position: absolute; top: 80px; left: 0; right: 0; height: 1px; background-color: #f1f5f9;"></div>
+              <div style="position: absolute; top: 120px; left: 0; right: 0; height: 1px; background-color: #f1f5f9;"></div>
+              
+              <!-- Draw SVG Chart Line -->
+              <svg width="100%" height="100%" viewBox="0 0 400 120" preserveAspectRatio="none" style="position: absolute; top: 0; left: 0;">
+                <defs>
+                  <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.2"/>
+                    <stop offset="100%" stop-color="#1e3a8a" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <!-- Area path fill -->
+                <path d="M0,100 C50,60 80,85 130,45 C180,95 240,10 300,75 C350,20 400,60 400,60 L400,120 L0,120 Z" fill="url(#chart-grad)" />
+                <!-- Line path -->
+                <path d="M0,100 C50,60 80,85 130,45 C180,95 240,10 300,75 C350,20 400,60 400,60" fill="none" stroke="#1e3a8a" stroke-width="3" stroke-linecap="round" />
+                <!-- Circles on peaks -->
+                <circle cx="130" cy="45" r="5" fill="#1e3a8a" stroke="white" stroke-width="2" />
+                <circle cx="240" cy="10" r="5" fill="#1e3a8a" stroke="white" stroke-width="2" />
+                <circle cx="300" cy="75" r="5" fill="#1e3a8a" stroke="white" stroke-width="2" />
+              </svg>
+            </div>
+            <!-- X axis days labels -->
+            <div class="chart-axis-days">
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+              <span>Sun</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Split row: Subject Mastery and Top Pending -->
+        <div class="dashboard-grid-split">
+          
+          <!-- Subject Mastery progress bars -->
+          <div class="panel-card-revamped">
+            <div class="panel-card-header">
+              <h3>Subject Mastery</h3>
+            </div>
+            <div class="subject-mastery-list">
+              <!-- Math -->
+              <div class="mastery-item">
+                <div class="mastery-meta">
+                  <span>Computer Science</span>
+                  <span>85%</span>
+                </div>
+                <div class="mastery-progress-bar">
+                  <div class="mastery-progress-fill fill-math" style="width: 85%;"></div>
+                </div>
+              </div>
+              <!-- Physics -->
+              <div class="mastery-item">
+                <div class="mastery-meta">
+                  <span>Mathematics</span>
+                  <span>62%</span>
+                </div>
+                <div class="mastery-progress-bar">
+                  <div class="mastery-progress-fill fill-physics" style="width: 62%;"></div>
+                </div>
+              </div>
+              <!-- Economics -->
+              <div class="mastery-item">
+                <div class="mastery-meta">
+                  <span>Physics</span>
+                  <span>45%</span>
+                </div>
+                <div class="mastery-progress-bar">
+                  <div class="mastery-progress-fill fill-economics" style="width: 45%;"></div>
+                </div>
+              </div>
+              <!-- Writing -->
+              <div class="mastery-item">
+                <div class="mastery-meta">
+                  <span>Literature</span>
+                  <span>92%</span>
+                </div>
+                <div class="mastery-progress-bar">
+                  <div class="mastery-progress-fill fill-writing" style="width: 92%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Pending checklist -->
+          <div class="panel-card-revamped">
+            <div class="panel-card-header">
+              <h3>Top Pending</h3>
+              <a href="#tasks" class="panel-header-link" data-view="tasks">View All</a>
+            </div>
+            <div id="analytics-pending-list" class="pending-list-wrapper">
+              <!-- Dynamically populated rows -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Completion Distribution tiles and Elite Banner -->
+        <div class="distribution-summary-row">
+          <div class="distribution-card dist-completed">
+            <div id="dist-val-completed" class="dist-card-val">0</div>
+            <div class="dist-card-lbl">Completed</div>
+          </div>
+          <div class="distribution-card dist-pending">
+            <div id="dist-val-pending" class="dist-card-val">0</div>
+            <div class="dist-card-lbl">Pending</div>
+          </div>
+          <div class="distribution-card dist-overdue">
+            <div id="dist-val-overdue" class="dist-card-val">0</div>
+            <div class="dist-card-lbl">Overdue</div>
+          </div>
+        </div>
+
+        <!-- Elite Momentum banner -->
+        <div class="elite-momentum-card">
+          <div class="elite-content">
+            <div class="elite-badge-icon">🏆</div>
+            <h4 class="elite-title">Elite Momentum</h4>
+            <p class="elite-desc">You've maintained a focus streak for 12 consecutive days. You're among the most consistent learners this month. Claim your badge to showcase on your profile.</p>
+            <button class="btn btn-accent" onclick="alert('Badge claimed successfully and added to your profile! 🎓')">Claim Badge</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW: SCHEDULE CALENDAR                    -->
+      <!-- ========================================== -->
+      <section id="view-schedule" class="view-section">
+        <div class="calendar-card">
+          <div class="calendar-topbar">
+            <!-- Nav buttons -->
+            <button id="cal-prev-btn" class="action-select-btn">◀ Previous</button>
+            <h3 id="calendar-month-year-title" class="calendar-month-title">May 2026</h3>
+            <button id="cal-next-btn" class="action-select-btn">Next ▶</button>
+          </div>
+
+          <!-- Day names header row -->
+          <div class="calendar-weekdays-row">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+          </div>
+
+          <!-- Calendar month cells grid -->
+          <div id="calendar-grid-cells" class="calendar-grid-cells">
+            <!-- Dynamically populated dates cells -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Slide-in Toast Notifications -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

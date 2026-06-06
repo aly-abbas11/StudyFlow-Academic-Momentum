@@ -1,0 +1,165 @@
+[
+  {
+    "id": "2",
+    "title": "Read Biology Chapter 4 & 5",
+    "subject": "Biology",
+    "priority": "Academic",
+    "dueDate": "2026-05-22T20:00",
+    "estimatedHours": 2,
+    "completed": false,
+    "createdAt": "2026-05-20T09:15:00.000Z"
+  },
+  {
+    "id": "3",
+    "title": "Outline Literature Essay",
+    "subject": "Literature",
+    "priority": "Academic",
+    "dueDate": "2026-05-19T23:59",
+    "estimatedHours": 1.5,
+    "completed": true,
+    "createdAt": "2026-05-19T10:00:00.000Z"
+  },
+  {
+    "id": "4",
+    "title": "Review Chemistry Lab Notes",
+    "subject": "Chemistry",
+    "priority": "Low",
+    "dueDate": "2026-05-23T14:00",
+    "estimatedHours": 2.5,
+    "completed": false,
+    "createdAt": "2026-05-20T09:30:00.000Z"
+  },
+  {
+    "id": "1779256140374",
+    "userId": "1779256140371",
+    "title": "Explore Academic Momentum Dashboard",
+    "subject": "General",
+    "priority": "Academic",
+    "dueDate": "2026-05-29T17:52",
+    "estimatedHours": 1,
+    "completed": false,
+    "createdAt": "2026-05-20T05:49:00.373Z",
+    "description": ""
+  },
+  {
+    "id": "1779256140375",
+    "userId": "1779256140371",
+    "title": "Create My First Study Task",
+    "subject": "General",
+    "priority": "Critical",
+    "dueDate": "2026-05-22T05:49",
+    "estimatedHours": 0.5,
+    "completed": true,
+    "createdAt": "2026-05-20T05:49:00.373Z"
+  },
+  {
+    "id": "1779256191228",
+    "userId": "1779256191226",
+    "title": "Explore Academic Momentum Dashboard",
+    "subject": "General",
+    "priority": "Academic",
+    "dueDate": "2026-05-21T05:49",
+    "estimatedHours": 1,
+    "completed": false,
+    "createdAt": "2026-05-20T05:49:51.227Z"
+  },
+  {
+    "id": "1779256191229",
+    "userId": "1779256191226",
+    "title": "Create My First Study Task",
+    "subject": "General",
+    "priority": "Critical",
+    "dueDate": "2026-05-22T05:49",
+    "estimatedHours": 0.5,
+    "completed": false,
+    "createdAt": "2026-05-20T05:49:51.227Z"
+  },
+  {
+    "id": "1779257485980",
+    "userId": "1779256136044",
+    "title": "Advanced Calculus Final Prep",
+    "subject": "Mathematics",
+    "priority": "Critical",
+    "dueDate": "2026-05-21T06:11",
+    "estimatedHours": 2.5,
+    "completed": true,
+    "createdAt": "2026-05-20T06:11:25.979Z"
+  },
+  {
+    "id": "1779257485981",
+    "userId": "1779256136044",
+    "title": "Lab Report: Chemistry",
+    "subject": "Chemistry",
+    "priority": "Academic",
+    "dueDate": "2026-05-23T06:11",
+    "estimatedHours": 1.5,
+    "completed": true,
+    "createdAt": "2026-05-20T06:11:25.979Z"
+  },
+  {
+    "id": "1779257485982",
+    "userId": "1779256136044",
+    "title": "World Literature Essay",
+    "subject": "Literature",
+    "priority": "Academic",
+    "dueDate": "2026-05-25T06:11",
+    "estimatedHours": 3,
+    "completed": false,
+    "createdAt": "2026-05-20T06:11:25.979Z"
+  },
+  {
+    "id": "1779257485983",
+    "userId": "1779256136044",
+    "title": "Organize Research Papers",
+    "subject": "Computer Science",
+    "priority": "Low",
+    "dueDate": "2026-05-26T06:11",
+    "estimatedHours": 1,
+    "completed": false,
+    "createdAt": "2026-05-20T06:11:25.979Z"
+  },
+  {
+    "id": "1779257571815",
+    "userId": "1779256140371",
+    "title": "Master Advanced Physics",
+    "subject": "Mathematics",
+    "priority": "Academic",
+    "dueDate": "2026-05-29T06:12",
+    "estimatedHours": 2,
+    "completed": false,
+    "createdAt": "2026-05-20T06:12:51.815Z"
+  },
+  {
+    "id": "1779259801049",
+    "userId": "1779256140371",
+    "title": "jhjhj",
+    "subject": "Mathematics",
+    "priority": "Critical",
+    "dueDate": "2026-05-29T06:53",
+    "estimatedHours": 1,
+    "completed": false,
+    "createdAt": "2026-05-20T06:50:01.049Z"
+  },
+  {
+    "id": "1780759457789",
+    "userId": "1780759457780",
+    "title": "Explore Academic Momentum Dashboard",
+    "subject": "General",
+    "priority": "Academic",
+    "dueDate": "2026-06-07T15:24",
+    "estimatedHours": 1,
+    "completed": false,
+    "createdAt": "2026-06-06T15:24:17.788Z"
+  },
+  {
+    "id": "1780759457790",
+    "userId": "1780759457780",
+    "title": "Create My First Study Task",
+    "subject": "General",
+    "priority": "Critical",
+    "dueDate": "2026-06-08T15:24",
+    "estimatedHours": 0.5,
+    "completed": false,
+    "createdAt": "2026-06-06T15:24:17.788Z"
+  }
+]

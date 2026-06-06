@@ -1,0 +1,33 @@
+[
+  {
+    "id": "1779256136044",
+    "username": "ikram_student",
+    "email": "ikram@university.edu",
+    "passwordHash": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f",
+    "createdAt": "2026-05-20T05:48:56.045Z",
+    "weeklyGoal": 50,
+    "focusSubject": "Computer Science",
+    "streak": 5
+  },
+  {
+    "id": "1779256140371",
+    "username": "Salman",
+    "email": "salmantanveer@gmail.com",
+    "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+    "createdAt": "2026-05-20T05:49:00.371Z"
+  },
+  {
+    "id": "1779256191226",
+    "username": "Salman12",
+    "email": "salmantanveer12@gmail.com",
+    "passwordHash": "13aacf62bf7029566aa6488bd4722075f9c8a3fa3e63ae018819998ff619e409",
+    "createdAt": "2026-05-20T05:49:51.226Z"
+  },
+  {
+    "id": "1780759457780",
+    "username": "alyabbas11",
+    "email": "forworkuse10@gmail.com",
+    "passwordHash": "500bb7a44c05dac40af4bda01c1bfa4d840d0ecef5e983d1c643b0d734e388d9",
+    "createdAt": "2026-06-06T15:24:17.785Z"
+  }
+]
